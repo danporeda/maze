@@ -55,6 +55,7 @@ const horizontals = Array(cells - 1).fill(null).map(() => Array(cells).fill(fals
 const startRow = Math.floor(Math.random() * cells);
 const startColumn = Math.floor(Math.random() * cells);
 
+// Create grid values, creating values for horizontals and verticals arrays
 const stepThroughCell = (row, column) => {
   if (grid[row][column]) {
     return;
@@ -70,16 +71,13 @@ const stepThroughCell = (row, column) => {
   ]);
   
   for (let neighbor of neighbors) {
-    console.log(`row: ${row} column: ${column}`);
     const [nextRow, nextColumn, direction] = neighbor;
     
     if (nextRow < 0 || nextRow >= cells || nextColumn < 0 || nextColumn >= cells) {
-      console.log('< > continue', direction);
       continue;
     }
 
     if (grid[nextRow][nextColumn]) {
-      console.log('cell true continue', direction);
       continue;
     }
 
@@ -92,13 +90,16 @@ const stepThroughCell = (row, column) => {
     } else if (direction === 'down') {
       horizontals[row][column] = true;
     }
-    console.log(nextRow, nextColumn);
+    
+    // nested callback; when a grid cell has no moving options, it goes back to the prior
+    // function call and searches for remaining moving options, until the first function call. 
     stepThroughCell(nextRow, nextColumn);
   }
 };
-console.log(`startRow: ${startRow}, startColumn: ${startColumn}`);
+
 stepThroughCell(startRow, startColumn);
 
+// Generate Walls based on verticals & horizontals arrays 
 horizontals.forEach((row, rowIndex) => {
   row.forEach((open, columnIndex) => {
     if (open){
