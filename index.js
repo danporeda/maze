@@ -1,7 +1,7 @@
 const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
-const cellsVertical = 10;
-const cellsHorizontal = 15;
+const cellsVertical = 20;
+const cellsHorizontal = 25;
 const width = window.innerWidth;
 const height = window.innerHeight;
 
@@ -200,6 +200,10 @@ Events.on(engine, 'collisionStart', event => {
     }
   });
 });
+
+//  TODO: create element for button to restart maze upon win condition
+
+
 
 
 // Random Shapes
