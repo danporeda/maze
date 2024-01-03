@@ -102,7 +102,10 @@ const newMaze = (
   unitLengthY, 
   cellsVertical, 
   cellsHorizontal
-  ) => {
+) => {
+  setTimeout(() => {
+    document.querySelector('.instructions').classList.add('hidden');
+  }, 3000)
   generateWalls(world, width, height);
 
   const grid = Array(cellsVertical).fill(null).map(() => Array(cellsHorizontal).fill(false));
@@ -174,22 +177,22 @@ const newMaze = (
   document.addEventListener('keydown', event => {
     const { x, y } = ball.velocity;
 
-    // Up
+    // Up: w
     if (event.keyCode === 87) {
       Body.setVelocity(ball, { x, y: y - 5 });
     }
 
-    // Down
+    // Down: s
     if (event.keyCode === 83) {
       Body.setVelocity(ball, { x, y: y + 5 });
     }
 
-    // Left
+    // Left: a
     if (event.keyCode === 65) {
       Body.setVelocity(ball, { x: x - 5, y });
     }
 
-    // Right
+    // Right: d
     if (event.keyCode === 68) {
       Body.setVelocity(ball, { x: x + 5, y });
     };
@@ -218,10 +221,16 @@ const newMaze = (
 
 newMaze(world, width, height, unitLengthX, unitLengthY, cellsVertical, cellsHorizontal);
 
-const button = document.querySelector('input');
-button.addEventListener('click', () => {
+const gotIt = document.querySelector('#got-it');
+gotIt.addEventListener('click', () => {
+  document.querySelector('.instructions').classList.add('hidden');
+});
+
+const restartButton = document.querySelector('#restart');
+restartButton.addEventListener('click', () => {
   document.querySelector('.winner').classList.add('hidden');
   Composite.clear(world);
   world.gravity.y = 0;
+  document.querySelector('.instructions').classList.remove('hidden');
   newMaze(world, width, height, unitLengthX, unitLengthY, cellsVertical, cellsHorizontal);
 });

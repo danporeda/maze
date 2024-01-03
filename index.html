@@ -24,12 +24,30 @@
       height: 100vh;
       width: 100vw;
     }
+
+    .instructions {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-content: space-around;
+      text-align: center;
+      position: absolute;
+      z-index: 1;
+      height: 100vh;
+      width: 100vw;
+    }
   </style>
 </head>
 <body>
+  <div class="instructions">
+    <h1>W:&uarr;<br>A:&larr; &nbsp;&nbsp;&nbsp; S:&darr; &nbsp;&nbsp;&nbsp; D:&rarr;</h1>
+    <br>
+    <input id="got-it" type="button" value="Got it!" />
+  </div>
   <div class="winner hidden">
     <h1>You Win!</h1>
-    <input type="button" value="Restart New Maze" />
+    <input id="restart" type="button" value="Restart New Maze" />
   </div>
   <script src="index.js"></script>
 </body>
